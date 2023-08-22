@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Hibit;
 
-final class CriteriaField
+final class CriteriaSortField
 {
     protected string $value;
 
@@ -18,9 +18,9 @@ final class CriteriaField
         return $this->value();
     }
 
-    public static function fromString(string $value): CriteriaField
+    public static function fromString(string $value): CriteriaSortField
     {
-        return new CriteriaField($value);
+        return new CriteriaSortField($value);
     }
 
     public function value(): string

@@ -6,16 +6,18 @@ namespace Hibit;
 
 final class CriteriaSort
 {
-    private CriteriaField $field;
+    private CriteriaSortField $field;
     private CriteriaSortDirection $direction;
 
-    public function __construct(CriteriaField $field, CriteriaSortDirection $direction)
-    {
+    public function __construct(
+        CriteriaSortField $field,
+        CriteriaSortDirection $direction
+    ) {
         $this->field = $field;
         $this->direction = $direction;
     }
 
-    public function field(): CriteriaField
+    public function field(): CriteriaSortField
     {
         return $this->field;
     }
