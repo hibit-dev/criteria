@@ -21,7 +21,7 @@ final class CriteriaPagination
     public static function create(int $limit, ?int $offset = null): self
     {
         return new self(
-            Limit::fromInteger(max($limit, 0)),
+            Limit::fromInteger(max($limit, 1)),
             Offset::fromInteger(max(($offset ?? 0), 0)),
         );
     }
