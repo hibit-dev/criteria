@@ -18,10 +18,10 @@ final class CriteriaPagination
         $this->offset = $offset;
     }
 
-    public static function create(int $limit, ?int $offset = null): self
+    public static function create(?int $limit = 0, ?int $offset = null): self
     {
         return new self(
-            Limit::fromInteger(max($limit, 1)),
+            Limit::fromInteger(!empty($limit) ? max($limit, 1) : 0),
             Offset::fromInteger(max(($offset ?? 0), 0)),
         );
     }
