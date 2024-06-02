@@ -9,17 +9,15 @@ abstract class Criteria
     private ?CriteriaPagination $pagination;
     private ?CriteriaSort $sort;
 
-    protected function __construct(
-        ?CriteriaPagination $pagination = null,
-        ?CriteriaSort $sort = null
-    ) {
-        $this->pagination = $pagination;
+    protected function __construct(?CriteriaPagination $pagination = null, ?CriteriaSort $sort = null)
+    {
+        $this->pagination = ($pagination?->limit()->value() > 0) ? $pagination : null;
         $this->sort = $sort;
     }
 
     public function paginateBy(CriteriaPagination $pagination): static
     {
-        $this->pagination = $pagination;
+        $this->pagination = ($pagination->limit()->value() > 0) ? $pagination : null;
 
         return $this;
     }

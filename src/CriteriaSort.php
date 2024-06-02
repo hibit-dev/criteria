@@ -9,10 +9,8 @@ final class CriteriaSort
     private CriteriaSortField $field;
     private CriteriaSortDirection $direction;
 
-    private function __construct(
-        CriteriaSortField $field,
-        CriteriaSortDirection $direction
-    ) {
+    private function __construct(CriteriaSortField $field, CriteriaSortDirection $direction)
+    {
         $this->field = $field;
         $this->direction = $direction;
     }
