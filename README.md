@@ -99,7 +99,10 @@ $userCriteria->sort()?->field()->value();
 Note that all values can be nullable when constructing the query within the repository.
 
 ## Documentation
-You'll find instructions and full documentation on [HiBit](https://www.hibit.dev/posts/124/criteria-php-package-for-managing-criteria-pattern). It includes detailed info on how to wire and use the module.
+Discover a world of knowledge hosted on [HiBit website](https://www.hibit.dev). Serving as your informational hub, this resource offers clear instructions and valuable insights to explore a spectrum of articles, tutorials, stories, news, and beyond.  
+
+You'll find detailed instructions and comprehensive documentation about this repository on:
+- [Criteria: PHP package for managing Criteria Pattern](https://www.hibit.dev/posts/124/criteria-php-package-for-managing-criteria-pattern)
 
 ## Security
 If you discover any security related issues, please email security@hibit.dev instead of using the issue tracker.
