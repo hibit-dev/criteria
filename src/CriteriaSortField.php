@@ -4,23 +4,13 @@ declare(strict_types=1);
 
 namespace Hibit;
 
-final class CriteriaSortField
+final readonly class CriteriaSortField
 {
-    protected string $value;
+    public string $value;
 
     public function __construct(string $value)
     {
         $this->value = $value;
-    }
-
-    public function __toString()
-    {
-        return $this->value();
-    }
-
-    public static function fromString(string $value): CriteriaSortField
-    {
-        return new CriteriaSortField($value);
     }
 
     public function value(): string
@@ -28,8 +18,8 @@ final class CriteriaSortField
         return $this->value;
     }
 
-    public function empty(): bool
+    public function __toString()
     {
-        return empty($this->value());
+        return $this->value();
     }
 }

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Hibit;
 
-final class CriteriaSort
+final readonly class CriteriaSort
 {
-    private CriteriaSortField $field;
-    private CriteriaSortDirection $direction;
+    public CriteriaSortField $field;
+    public CriteriaSortDirection $direction;
 
     private function __construct(CriteriaSortField $field, CriteriaSortDirection $direction)
     {
@@ -18,18 +18,8 @@ final class CriteriaSort
     public static function create(string $field, CriteriaSortDirection $direction): self
     {
         return new self(
-            CriteriaSortField::fromString($field),
+            new CriteriaSortField($field),
             $direction,
         );
-    }
-
-    public function field(): CriteriaSortField
-    {
-        return $this->field;
-    }
-
-    public function direction(): CriteriaSortDirection
-    {
-        return $this->direction;
     }
 }

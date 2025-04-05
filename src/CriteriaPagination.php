@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace Hibit;
 
-use Hibit\ValueObject\Limit;
-use Hibit\ValueObject\Offset;
-
-final class CriteriaPagination
+final readonly class CriteriaPagination
 {
-    private Limit $limit;
-    private Offset $offset;
+    public int $limit;
+    public int $offset;
+    public int $page;
 
-    private function __construct(Limit $limit, Offset $offset)
+    private const int DEFAULT_LIMIT = 10;
+
+    private function __construct(int $limit, int $offset)
     {
         $this->limit  = $limit;
         $this->offset = $offset;
+        $this->page = (0 === $offset) ? 1: intval(ceil($offset / $limit));
     }
 
-    public static function create(?int $limit = 0, ?int $offset = null): self
+    public static function create(?int $limit = self::DEFAULT_LIMIT, ?int $offset = null): self
     {
         return new self(
-            Limit::fromInteger(!empty($limit) ? max($limit, 1) : 0),
-            Offset::fromInteger(max(($offset ?? 0), 0)),
+            !empty($limit) ? max($limit, self::DEFAULT_LIMIT) : 0,
+            max(($offset ?? 0), 0),
         );
     }
 
@@ -32,25 +33,6 @@ final class CriteriaPagination
             return 1;
         }
 
-        return (int) ceil($totalItems / $this->limit->value());
-    }
-
-    public function page(): int
-    {
-        if (0 === $this->offset->value()) {
-            return 1;
-        }
-
-        return (int) ceil($this->offset->value() / $this->limit->value());
-    }
-
-    public function limit(): Limit
-    {
-        return $this->limit;
-    }
-
-    public function offset(): Offset
-    {
-        return $this->offset;
+        return (int) ceil($totalItems / $this->limit);
     }
 }
