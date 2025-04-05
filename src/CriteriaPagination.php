@@ -22,7 +22,7 @@ final readonly class CriteriaPagination
     public static function create(?int $limit = self::DEFAULT_LIMIT, ?int $offset = null): self
     {
         return new self(
-            !empty($limit) ? max($limit, self::DEFAULT_LIMIT) : 0,
+            !empty($limit) ? max($limit, 1) : 0,
             max(($offset ?? 0), 0),
         );
     }
