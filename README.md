@@ -18,10 +18,10 @@ use Hibit\Criteria;
 use Hibit\CriteriaPagination;
 use Hibit\CriteriaSort;
  
-final class UserSearchCriteria extends Criteria
+final readonly class UserSearchCriteria extends Criteria
 {
-    public readonly ?string $name;
-    public readonly ?string $email;
+    public ?string $name;
+    public ?string $email;
  
     public static function create(
         CriteriaPagination $pagination,
