@@ -16,42 +16,30 @@ A specific criteria must be created for each use case. It will extend the shared
 ```php
 use Hibit\Criteria;
 use Hibit\CriteriaPagination;
+use Hibit\CriteriaSort;
  
 final class UserSearchCriteria extends Criteria
 {
-    public const PER_PAGE = 10;
- 
-    private ?string $email = null;
-    private ?string $name = null;
+    public readonly ?string $name;
+    public readonly ?string $email;
  
     public static function create(
-        string $email = null,
-        string $name = null
+        CriteriaPagination $pagination,
+        CriteriaSort $sort,
+        ?string $name = null,
+        ?string $email = null,
     ): UserSearchCriteria {
-        $criteria = new self(CriteriaPagination::create(self::PER_PAGE));
+        $criteria = new self($pagination, $sort);
  
-        if (!empty($email)) {
-            $criteria->email = $email;
-        }
- 
-        if (!empty($name)) {
-            $criteria->name = $name;
-        }
+        $criteria->name = $name;
+        $criteria->email = $email;
  
         return $criteria;
     }
- 
-    public function email(): ?string
-    {
-        return $this->email;
-    }
- 
-    public function name(): ?string
-    {
-        return $this->name;
-    }
 }
 ```
+
+The create() method of UserSearchCriteria takes a CriteriaPagination and CriteriaSort object as its first two parameters. These define how results should be paginated and sorted. The optional email and name parameters allow filtering results based on those fields.
 
 Assuming the user repository already exists, the criteria usage will look like as following
 
@@ -64,14 +52,13 @@ class CriteriaTestClass
 {
     public function __invoke(UserRepository $userRepository): array
     {
-        // Pagination criteria: limit=10 offset=0
-        $pagination = CriteriaPagination::create(10, 0);
- 
-        // Sorting criteria: created_at ASC
-        $sorting = CriteriaSort::create('created_at', CriteriaSortDirection::ASC);
- 
-        // Filter criteria: name=John
-        $userSearchCriteria = UserSearchCriteria::create(null, 'John');
+        // Filter criteria: name=John (default pagination & sort by creation date desc) 
+        $userSearchCriteria = UserSearchCriteria::create(
+            CriteriaPagination::create(), // Default pagination
+            CriteriaSort::create('created_at', CriteriaSortDirection::DESC),
+            null,
+            'John'
+        );
  
         $userSearchCriteria->paginateBy($pagination)->sortBy($sorting);
  
@@ -80,20 +67,36 @@ class CriteriaTestClass
 }
 ```
 
+CriteriaPagination manages pagination with a limit and offset. Use CriteriaPagination::create() to build it, specifying the limit and offset (defaults to 10 and 0). 
+
+```php
+// Pagination: limit=10 (default), offset=0
+CriteriaPagination::create(),
+
+// Pagination: limit=10 (default), offset=10
+CriteriaPagination::create(null, 10),
+
+// Pagination: limit=20, offset=0
+CriteriaPagination::create(20),
+
+// Pagination: limit=20, offset=20
+CriteriaPagination::create(20, 20),
+```
+
 At the end, the criteria object is passed to the repository and applied when building the query to retrieve data. Following methods will be accessible within the repository's search function, ensuring the accurate filtering of results.
 
 ```php
 // Criteria filters
-$userCriteria->email();
-$userCriteria->name();
+$userCriteria->email;
+$userCriteria->name;
  
 // Criteria pagination
-$userCriteria->pagination()?->limit()->value();
-$userCriteria->pagination()?->offset()->value();
+$userCriteria->pagination?->limit;
+$userCriteria->pagination?->offset;
  
 // Criteria sorting
-$userCriteria->sort()?->field()->value();
-$userCriteria->sort()?->field()->value();
+$userCriteria->sort?->field->value();
+$userCriteria->sort?->direction->value();
 ```
 
 Note that all values can be nullable when constructing the query within the repository.
