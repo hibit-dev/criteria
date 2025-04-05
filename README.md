@@ -52,16 +52,13 @@ class CriteriaTestClass
 {
     public function __invoke(UserRepository $userRepository): array
     {
-        // Filter criteria: name=John (default pagination & sort by creation date desc) 
-        $userSearchCriteria = UserSearchCriteria::create(
-            CriteriaPagination::create(), // Default pagination
-            CriteriaSort::create('created_at', CriteriaSortDirection::DESC),
-            'John'
+        return $userRepository->searchByCriteria(
+            UserSearchCriteria::create(
+                CriteriaPagination::create(), // Default pagination
+                CriteriaSort::create('created_at', CriteriaSortDirection::DESC),
+                'John'
+            )
         );
- 
-        $userSearchCriteria->paginateBy($pagination)->sortBy($sorting);
- 
-        return $userRepository->searchByCriteria($userSearchCriteria);
     }
 }
 ```
