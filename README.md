@@ -56,7 +56,6 @@ class CriteriaTestClass
         $userSearchCriteria = UserSearchCriteria::create(
             CriteriaPagination::create(), // Default pagination
             CriteriaSort::create('created_at', CriteriaSortDirection::DESC),
-            null,
             'John'
         );
  
