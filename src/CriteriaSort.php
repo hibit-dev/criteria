@@ -15,11 +15,8 @@ final readonly class CriteriaSort
         $this->direction = $direction;
     }
 
-    public static function create(string $field, CriteriaSortDirection $direction): self
+    public static function create(string $field, ?CriteriaSortDirection $direction = CriteriaSortDirection::DESC): self
     {
-        return new self(
-            new CriteriaSortField($field),
-            $direction,
-        );
+        return new self(new CriteriaSortField($field), $direction);
     }
 }
