@@ -1,5 +1,13 @@
 <p align="center"><img src="https://raw.githubusercontent.com/hibit-dev/criteria/master/images/preview.png" alt="A comprehensive package for managing criteria pattern in PHP projects, streamlining data filtering, sorting, and pagination with ease."></p>
 
+<p align="center">
+<a href="https://github.com/hibit-dev/criteria/actions"><img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/hibit-dev/criteria/.github%2Fworkflows%2Fbuild.yml"></a>
+<a href="https://github.com/hibit-dev/criteria"><img alt="GitHub License" src="https://img.shields.io/github/license/hibit-dev/criteria"></a>
+<a href="https://packagist.org/packages/hibit-dev/criteria"><img alt="Packagist Version" src="https://img.shields.io/packagist/v/hibit-dev/criteria"></a>
+<a href="https://packagist.org/packages/hibit-dev/criteria"><img alt="Packagist Downloads" src="https://img.shields.io/packagist/dt/hibit-dev/criteria"></a>
+<a href="https://sonarcloud.io/summary/new_code?id=hibit-dev_geodetect"><img alt="Tests Coverage" src="https://sonarcloud.io/api/project_badges/measure?project=hibit-dev_geodetect&metric=coverage"></a>
+</p>
+
 # Clean query building using Criteria
 Criteria is a framework-agnostic PHP package that simplifies the use of the criteria pattern for filtering, sorting, and paginating data. It helps separate query logic from repositories, making the codebase easier to maintain and extend over time. By using Criteria, developers can handle complex querying needs without spreading filter logic across different parts of the application.
 
