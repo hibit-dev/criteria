@@ -28,7 +28,7 @@ final class CriteriaTest extends TestCase
         $this->assertInstanceOf(CriteriaSortField::class, $criteria->sort->field);
         $this->assertInstanceOf(CriteriaSortDirection::class, $criteria->sort->direction);
 
-        $this->assertSame($criteria->name, 'John');
-        $this->assertSame($criteria->email, 'john@example.com');
+        $this->assertSame('John', $criteria->name);
+        $this->assertSame('john@example.com', $criteria->email);
     }
 }
