@@ -1,3 +1,5 @@
+/reports
 /vendor
 /.idea
+coverage.xml
 .phpunit.result.cache
